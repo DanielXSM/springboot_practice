@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,16 +25,17 @@ public class welcome {
     public ModelAndView welcome(HttpServletRequest request, HttpServletResponse response){
         ModelAndView modelAndView=new ModelAndView();
         Map<String,Object> modelmap=modelAndView.getModel();
-        modelAndView.setViewName("cc");
+        modelAndView.setViewName("index");
         logger.debug("come to welcome controller");
+        System.out.println("666666");
         return modelAndView;
     }
-    @RequestMapping("/index")
-    @ResponseBody
-    public String index(HttpServletRequest request, HttpServletResponse response){
-        logger.debug("come to welcome controller");
-        return "aaaaa";
-    }
+//    @RequestMapping("/index")
+//    @ResponseBody
+//    public String index(HttpServletRequest request, HttpServletResponse response){
+//        logger.debug("come to welcome controller");
+//        return "aaaaa";
+//    }
     @GetMapping("/hello")
     public ResponseEntity indexs(HttpServletRequest request, HttpServletResponse response){
         logger.debug("come to welcome controller");
