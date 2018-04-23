@@ -5,16 +5,16 @@
   Time: 22:51
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=gbk" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
 <form method="get" action="/user/login">
-    ç”¨æˆ·å:<input type="text" name="name">
-    å¯†ç :<input type="text" name="pwd">
-    <input type="submit" value="ç™»é™†">
+    ÓÃ»§Ãû:<input type="text" name="name">
+    ÃÜÂë:<input type="text" name="pwd">
+    <input type="submit" value="µÇÂ½">
 </form>
 </body>
 </html>
