@@ -38,7 +38,7 @@ public class UserController {
 
     @RequestMapping(value="/login")
     public String login(final UserEntity user,HttpServletRequest request){
-        String result="successful";
+        String result="index";
         UserEntity userEntity=userJPA.findOne(new Specification<UserEntity>() {
             @Override
             public Predicate toPredicate(Root<UserEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
