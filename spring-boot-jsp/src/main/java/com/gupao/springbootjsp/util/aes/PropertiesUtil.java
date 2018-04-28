@@ -20,6 +20,7 @@ public class PropertiesUtil {
      */
     private static PropertiesLoader propertiesLoader = null;
 
+
     /**
      * 初始化配置文件
      */
