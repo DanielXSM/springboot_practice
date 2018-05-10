@@ -19,7 +19,7 @@ public class Config extends WebMvcConfigurerAdapter {
     /*@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        super.addResourceHandlers(registry);
         registry.addResourceHandler("/a/static/**").addResourceLocations("/static/");
+        super.addResourceHandlers(registry);
     }*/
 }

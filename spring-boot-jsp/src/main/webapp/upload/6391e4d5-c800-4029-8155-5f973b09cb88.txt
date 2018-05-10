@@ -1,0 +1,58 @@
+279  TRadingAccountServiceImpl
+
+
+if (userMT4AccountService.selectCountByStatus(uid, UserMT4StatusEnum.IB_COMMISSION.getValue()) == 0) {
+			UserMT4Account userMT4Account = new UserMT4Account();
+			userMT4Account.setUid(uid);
+			userMT4Account.setDataSourceId(dataSource_Id);
+			userMT4Account.setUserStaus(UserMT4StatusEnum.IB_COMMISSION.getValue());
+			userMT4Account.setCreateIp(userIP);
+			userMT4Account.setCreateTime(DateUtil.getCurrentTime());
+			userMT4Account.setIsDel(0);
+			userMT4Account.setUpdateIp(userIP);
+			userMT4Account.setUpdateTime(DateUtil.getCurrentTime());//账号生效日取当前升级时间
+			userMT4Account.setUserMT4AccountType(ProjectTypeEnum.COMMON.getValue());
+			userMT4Account.setStatus(UserMT4AccountStatusEnum.AUDIT_WRITE.getValue());
+			userMT4Account.setAgentMt4Account(Integer.parseInt(mt4Account));
+			userMT4Account.setMt4Account(0);
+			userMT4Account.setAccountType(AccountTypeEnum.REGISTER.getValue());
+			userMT4Account.setIbId(userRegister.getIs_ibId());
+			int a=userMT4AccountService.doInsert(userMT4Account);
+			if (a < 1) {
+				throw new RuntimeException("注册ib失败");
+			}
+
+		}
+
+IbserviceImpl   614
+
+if (userMT4AccountService.selectCountByStatus(uid, UserMT4StatusEnum.IB_COMMISSION.getValue()) == 1) {
+            List<UserMT4Account> userAccounts=userMT4AccountService.getByUidAndStatus(uid, UserMT4StatusEnum.IB_COMMISSION.getValue());
+            if(null!=userAccounts&&userAccounts.size()==1){
+                UserMT4Account userMT4Account=userAccounts.get(0);
+                Mt4UserDto mt4User = userRegisterService.createLiveMT4Account(user, userRegister, mt4group, levelage, 0, dataSourceBean);
+                UserAccount userAccount = userAccountService.getUserAccountByUid(uid);
+                userMT4Account.setUid(uid);
+                userMT4Account.setDataSourceId(dataSourceId);
+                userMT4Account.setMt4Account(mt4User.getLogin());
+                userMT4Account.setMt4GroupId(mt4group);
+                userMT4Account.setUserStaus(UserMT4StatusEnum.IB_COMMISSION.getValue());
+                userMT4Account.setIsDel(0);
+                userMT4Account.setUpdateUser(userRegisterService.findById(current.getUserId()).getCnName());
+                userMT4Account.setUpdateIp(ip);
+                userMT4Account.setUpdateTime(DateUtil.getCurrentTime());//账号生效日取当前升级时间
+                userMT4Account.setUserMT4AccountType(ProjectTypeEnum.COMMON.getValue());
+                userMT4Account.setStatus(UserMT4AccountStatusEnum.PASS.getValue());
+
+            }
+
+
+
+UserMt4AccountMapper  67
+
+<select id="getByUidAndStatus" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_user_mt4_account
+        where uid = #{uid,jdbcType=INTEGER} and userStaus = #{userStatus,jdbcType=INTEGER} and is_del = 0
+    </select>

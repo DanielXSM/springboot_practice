@@ -2,6 +2,8 @@ package com.gupao.springbootjsp.controller;
 
 import com.gupao.springbootjsp.jpa.UserJPA;
 import com.gupao.springbootjsp.model.UserEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value="/user")
 public class UserController {
+    private static final Logger logger=LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserJPA userJPA;
     @RequestMapping(value="/list")
@@ -48,6 +51,7 @@ public class UserController {
         });
         //用户不存在
         if(null==userEntity){
+
              result="no user";
         }
         //密码错误
@@ -60,17 +64,25 @@ public class UserController {
 
     /**
      * 初始化登陆页面
+     *
      * @return
      */
-    @RequestMapping(value = "/login_view",method = RequestMethod.GET)
-    public String login_view(HttpServletRequest request, HttpServletResponse response){
-      return "login";
-        }
+    @RequestMapping(value = "/login_view", method = RequestMethod.GET)
+    public String login_view(HttpServletRequest request, HttpServletResponse response) {
+        logger.info("主页访问~~~~");
+        logger.debug("主页访问~~~~");
+        logger.error("主页访问~~~~");
+        return "login";
+    }
 
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(){
+        logger.info("主页访问~~~~");
        return "index";
     }
+
+
+
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("_session_user");

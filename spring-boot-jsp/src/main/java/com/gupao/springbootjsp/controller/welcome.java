@@ -26,7 +26,7 @@ public class welcome {
         ModelAndView modelAndView=new ModelAndView();
         Map<String,Object> modelmap=modelAndView.getModel();
         modelAndView.setViewName("index");
-        logger.debug("come to welcome controller");
+        logger.info("come to welcome controller");
         System.out.println("666666");
         return modelAndView;
     }
