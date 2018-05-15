@@ -99,39 +99,43 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
+			<version>4.1.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-apt</artifactId>
+			<version>4.1.4</version>
 		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.mysema.maven</groupId>
+				<artifactId>apt-maven-plugin</artifactId>
+				<version>1.1.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>process</goal>
+						</goals>
+						<!--目录内有两个querydsl插件自动生成的实体，命名规则就是原实体名称前+Q前缀。
+						可以查看类内的代码，都是由querydsl插件自动构建的。
+						-->
+						<configuration>
+							<outputDirectory>target/generated-sources/java</outputDirectory>
+							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 	<!--该插件是可以生成queryDSL需要生成的对象，执行mvn compile 即可-->
-			<plugin>
-			<groupId>com.mysema.maven</groupId>
-			<artifactId>apt-maven-plugin</artifactId>
-			<executions>
-				<execution>
-					<goals>
-						<goal>
-							process
-						</goal>
-					</goals>
-					<configuration>
-						<outputDirectory>
-							target/generated-sources/java
-						</outputDirectory>
-						<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-					</configuration>
-				</execution>
-			</executions>
-			</plugin>
+
 		</plugins>
 	</build>
 
