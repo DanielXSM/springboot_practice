@@ -2,7 +2,7 @@ package com.gupao.springbootjsp.controller;
 
 import com.gupao.springbootjsp.jpa.UserJPA;
 import com.gupao.springbootjsp.model.UserEntity;
-import com.querydsl.apt.jpa.JPAAnnotationProcessor;
+import com.gupao.springbootjsp.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +28,8 @@ public class UserController {
     private static final Logger logger=LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserJPA userJPA;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value="/queryByName")
     @ResponseBody
@@ -71,13 +73,26 @@ public class UserController {
 }
 
     @RequestMapping(value="/list")
+    @ResponseBody
     public List<UserEntity> list(){
-        return userJPA.findAll();
+        return userService.list();
+    }
+
+    /**
+     * 根据姓名查找用户集合
+     * @param name
+     * @return
+     */
+    @RequestMapping(value="/findByName")
+    @ResponseBody
+    public List<UserEntity> findByName(String name){
+        return userService.findByName(name);
     }
 
     @RequestMapping(value="/save")
+    @ResponseBody
     public UserEntity save(UserEntity userEntity){
-        return userJPA.save(userEntity);
+        return userService.save(userEntity);
     }
     @RequestMapping(value="/delete")
     public List<UserEntity> delete(Long id){

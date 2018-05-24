@@ -22,8 +22,6 @@ public class FastJsonConfiguration extends WebMvcConfigurerAdapter{
      */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-        //调用父类的配置
-        super.configureMessageConverters(converters);
         //创建fastJson消息转换器
         FastJsonHttpMessageConverter fastConverter =new FastJsonHttpMessageConverter();
         //创建配置类
@@ -45,5 +43,7 @@ public class FastJsonConfiguration extends WebMvcConfigurerAdapter{
         //将fastjson添加到视图消息转换器列表内
         converters.add(fastConverter);
 
+        //调用父类的配置
+        super.configureMessageConverters(converters);
     }
 }

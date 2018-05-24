@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-       /* //登陆不做拦截
+        //登陆不做拦截
         if(request.getRequestURI().equals("/user/login")||request.getRequestURI().equals("/user/login_view")){
             return true;
         }
@@ -24,7 +24,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         if(null==obj){
             response.sendRedirect("/user/login_view");
             return false;
-        }*/
+        }
         return true;
     }
 

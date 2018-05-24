@@ -106,6 +106,18 @@
 			<artifactId>querydsl-apt</artifactId>
 			<version>4.1.4</version>
 		</dependency>
+
+		<!--添加redis 缓存支持-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+			<version>1.4.3.RELEASE</version>
+		</dependency>
+		<!--添加缓存支持-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
