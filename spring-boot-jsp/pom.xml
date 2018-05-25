@@ -29,7 +29,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -117,6 +120,22 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<!-- SpringSecurity安全框架 -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.2.3.RELEASE</version>
+		</dependency>
+		<!--jstl标签-->
+		<!--，我们下面就要根据角色，
+		在用户登录成功后显示不同的内容，
+		在这之前我们需要添加SpringSecurity为我们提供的JSTL标签库，
+		我们可以根据标签库自行判断登录用户的角色，-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.2.1.RELEASE</version>
 		</dependency>
 	</dependencies>
 

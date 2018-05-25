@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 @Entity
 @Table(name="t_user")
-public class UserEntity extends BaseEntity implements Serializable {
+public class UserModel extends BaseEntity implements Serializable {
 @Id
 @GeneratedValue
 @Column(name="t_id")

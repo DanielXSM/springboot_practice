@@ -1,46 +1,44 @@
 package com.gupao.springbootjsp.service;
 
-import com.gupao.springbootjsp.jpa.UserJPA;
-import com.gupao.springbootjsp.model.UserEntity;
+import com.gupao.springbootjsp.entity.UserEntity;
+import com.gupao.springbootjsp.jpa.UsersJPA;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * @program: spring-boot-jsp
- * @description:
+ * @description:权限
  * @author:Daniel.zhao
- * @create:2018-05-24 14:55
+ * @create:2018-05-25 17:08
  **/
-@Service
-@CacheConfig(cacheNames = "user")
-public class UserService {
-    @Autowired
-    private UserJPA userJPA;
+public class UserService implements UserDetailsService{
 
-    /**
-     * 该注解是用来开启声明的类参与缓存,如果方法内的@Cacheable注解没有添加key值，
-     * 那么会自动使用cahceNames配置参数并且追加方法名。
-     * @Cacheable：配置方法的缓存参数，可自定义缓存的key以及value。
-     *
-     */
-    @Cacheable
-    public List<UserEntity> list(){
-    return userJPA.findAll();
+        @Autowired
+        UsersJPA usersJPA;
+
+
+        /**
+         * 现UserDetailsService接口需要完成loanUserByUsername重写，
+         * 我们使用UserJPA内的findByUsername方法从数据库中读取用户，并将用户作为方法的返回值。
+         * @param username
+         * @return
+         * @throws UsernameNotFoundException
+         */
+        @Override
+        public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+            UserEntity user=usersJPA.findByUsername(username);
+            if(null==user){
+                throw new UsernameNotFoundException("未查询到用户:"+username+"信息");
+            }
+            return user;
+        }
+
+
+
     }
 
-    @Cacheable
-    public UserEntity save(UserEntity userEntity) {
-        return userJPA.save(userEntity);
-    }
 
 
-    @Cacheable
-    public List<UserEntity> findByName(String name){
-        return userJPA.queryListByCondition(name);
-    }
 
-}

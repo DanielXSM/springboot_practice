@@ -1,8 +1,9 @@
 package com.gupao.springbootjsp.controller;
 
+
 import com.gupao.springbootjsp.jpa.UserJPA;
-import com.gupao.springbootjsp.model.UserEntity;
-import com.gupao.springbootjsp.service.UserService;
+import com.gupao.springbootjsp.model.UserModel;
+import com.gupao.springbootjsp.service.CUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +30,11 @@ public class UserController {
     @Autowired
     private UserJPA userJPA;
     @Autowired
-    private UserService userService;
+    private CUserService userService;
 
     @RequestMapping(value="/queryByName")
     @ResponseBody
-    public List<UserEntity> queryByName(){
+    public List<UserModel> queryByName(){
         return userJPA.queryListByCondition("admin");
     }
 
@@ -45,8 +46,8 @@ public class UserController {
     }
     @RequestMapping(value="/cutPage")
     @ResponseBody
-    public List<UserEntity>cutPage(int page){
-    UserEntity userEntity=new UserEntity();
+    public List<UserModel>cutPage(int page){
+        UserModel userEntity=new UserModel();
     userEntity.setSize(2);
     userEntity.setPage(page);
     userEntity.setSort("desc");
@@ -74,7 +75,7 @@ public class UserController {
 
     @RequestMapping(value="/list")
     @ResponseBody
-    public List<UserEntity> list(){
+    public List<UserModel> list(){
         return userService.list();
     }
 
@@ -85,27 +86,27 @@ public class UserController {
      */
     @RequestMapping(value="/findByName")
     @ResponseBody
-    public List<UserEntity> findByName(String name){
+    public List<UserModel> findByName(String name){
         return userService.findByName(name);
     }
 
     @RequestMapping(value="/save")
     @ResponseBody
-    public UserEntity save(UserEntity userEntity){
+    public UserModel save(UserModel userEntity){
         return userService.save(userEntity);
     }
     @RequestMapping(value="/delete")
-    public List<UserEntity> delete(Long id){
+    public List<UserModel> delete(Long id){
         userJPA.delete(id);
         return userJPA.findAll();
     }
 
     @RequestMapping(value="/login")
-    public String login(final UserEntity user,HttpServletRequest request){
+    public String login(final UserModel user,HttpServletRequest request){
         String result="index";
-        UserEntity userEntity=userJPA.findOne(new Specification<UserEntity>() {
+        UserModel userEntity=userJPA.findOne(new Specification<UserModel>() {
             @Override
-            public Predicate toPredicate(Root<UserEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+            public Predicate toPredicate(Root<UserModel> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 criteriaQuery.where(criteriaBuilder.equal(root.get("name"),user.getName()));
                 return null;
             }
