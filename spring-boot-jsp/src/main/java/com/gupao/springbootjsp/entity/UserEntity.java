@@ -67,7 +67,7 @@ public class UserEntity  implements Serializable ,UserDetails {
         List<GrantedAuthority>auths=new ArrayList<>();
         List<RoleEntity> roles = getRoles();
         for(RoleEntity role:roles){
-            auths.add(new SimpleGrantedAuthority(role.getName()));
+            auths.add(new SimpleGrantedAuthority(role.getFlag()));
         }
         return auths;
     }

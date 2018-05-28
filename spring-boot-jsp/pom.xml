@@ -137,6 +137,21 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>4.2.1.RELEASE</version>
 		</dependency>
+		<!--OAuth是一个关于授权的开放网络标准，在全世界得到的广泛的应用，
+		目前是2.0的版本。OAuth2在“客户端”与“服务提供商”之间，设置了一个授权层(authorization layer)。
+		“客户端”不能直接登录“服务提供商”，只能登录授权层，以此将用户与客户端分离。“客户端”登录需要OAuth提供的令牌，
+		否则将提示认证失败而导致客户端无法访问服务。
+		下面我们就来讲解下SpringBoot项目中是如何配置使用OAuth2服务器端，并让OAuth2整合SpringSecurity来保护我们的REST接口。-->
+
+
+		<!--1、授权码模式（authorization code）
+		2、简化模式（implicit）
+		3、密码模式（resource owner password credentials）
+		4、客户端模式（client credentials）-->
+		<dependency>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

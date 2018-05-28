@@ -23,6 +23,17 @@ private Long id;
 @Column(name = "r_name")
 private String name;
 
+    @Column(name = "r_flag")
+    private String flag;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
