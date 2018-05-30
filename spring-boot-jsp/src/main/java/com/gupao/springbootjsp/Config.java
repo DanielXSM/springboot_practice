@@ -35,6 +35,7 @@ public class Config extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/socket").setViewName("socket");
         super.addViewControllers(registry);
     }
 }
